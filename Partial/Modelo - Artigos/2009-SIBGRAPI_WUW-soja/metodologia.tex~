@@ -1,0 +1,16 @@
+\subsection{Classificação}\label{classificação}
+Para classificar os danos como danos de coleópteros e lagartos foi utilizado o classificador linear LDA(Linear Discriminant Analysis).
+O LDA procura a melhor reta de separação dos dados de forma que aumente a distância entre classes e diminua a distância intra classe.
+
+O LDA calcula os centróides das classes($\mu_{i}$) e o centróide global($\mu$). O cálculo dos centroides é feito calculando a média sobre os vetores 
+de características. Os vetores de características são os graus máximo e médio de conectividade da rede dado um limiar. Tendo os centróides locais, 
+os dados são normalizados subtraindo-os. Em seguida a matriz de covariância de cada classe é calculada para os dados normalizados.
+Depois a matriz de covariância conjunta é calculada utilizando as matrizes de covariância das classes e as respectivas probabilidades a priori.
+Tendo esta matriz é calculada a inversa da matriz de covariância ($C^{-1}$). Com isso podemos calcular a função discriminante para cada classe. 
+Essa função é calculada pela fórmula:
+\begin{equation}
+ f_{i} = \mu_{i}C^{-1}x_{k}^{T}-\frac{1}{2}\mu_{i}C^{-1}\mu_{k}^{T}-ln(p_{i})
+\end{equation}\label{eq:funcdisc}
+
+A classe do dano que a ser classificado é aquela que a função discriminante é maximizada dado o vetor de caracteristicas($x_{i}$) do dano.
+

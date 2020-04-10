@@ -1,0 +1,30 @@
+function classe = discfunction(img,n)
+    
+    x = degreevector(img);
+    [x1 x2 u1 u2] = normaliza(n);
+    
+    p1 = 630/1530;
+    p2 = 900/1530;
+
+    
+    
+    [l1 c1] = size(x1);
+    [l2 c2] = size(x2);
+    
+    n1 = l1/(l1+l2);
+    n2 = l2/(l1+l2);
+    
+    c1 = cov(x1);
+    c2 = cov(x2);
+    
+    C =n1.*c1 + n2.*c2;
+    
+    f1 = u1*inv(C)*(x') - 1/2*u1*inv(C)*(u1')+log(p1);
+    f2 = u2*inv(C)*(x') - 1/2*u2*inv(C)*(u2')+log(p2);
+    
+    if(f1>f2)
+        classe = 'coleoptero';
+    else
+        classe = 'lagarta';
+    end
+end

@@ -1,0 +1,324 @@
+Para execução de experimentos foi utilizada uma base de $180$ imagens de folíolos de soja. Essas imagens foram obtidas escaneando
+ os folíolos, gerando imagens coloridas (24 \emph{bits} por \emph{pixel}) de resolução de $200$ dpi (``\emph{Dots per inch}'' - 
+Pontos por polegada) armazenadas em formato BMP (\emph{Bitmap}). As imagens foram preprocessadas utilizando os métodos mostrados 
+na seção \ref{preproc}. Todos os danos extraídos foram salvos em imagens gerando uma base de $1700$ danos.
+
+Os danos extraídos foram classificados manualmente pelos autores para o aprendizado supervisionado como sendo danos de
+ coleópteros ou lagartas. Essa classificação gerou uma base de 1000 danos causados por lagartas e 700 danos causados por coleópteros.
+
+O limiar T_{l} utilizado para gerar as características foi variado conforme a tabela \ref{tab:varT}
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|c|c|]
+		\hline
+		 T & t_{0} & t_{inc} & t_{q} & Número de limiares\\
+		\hline
+		 T1 & 0.01 & 0.015 & 0.150 & 10\\
+		\hline
+		 T2 & 0.01 & 0.035 & 0.350 & 10\\
+		\hline
+		 T3 & 0.01 & 0.050 & 0.500 & 10\\
+		\hline
+		 T4 & 0.01 & 0.065 & 0.650 & 10\\
+		\hline		 
+		 T5 & 0.01 & 0.085 & 0.850 & 10\\
+		\hline
+		 T6 & 0.025 & 0.075 & 0.875 & 12\\
+		\hline
+	\end{tabular}
+	\caption{Limiares Utilizados}
+	\label{tab:varT}
+\end{table} 
+
+
+
+Para validação dos testes foi utilizada Validação Cruzada (``K-Fold Cross Validation''), onde nossa base foi separada 
+em 10 partições, cada partição continha 170 imagens de danos, sendo 100 imagens de danos de lagartas e 70 de danos
+de coleópteros. foram feitas 10 iterações, a cada iteração uma partição diferente era separada. A partição separada foi 
+utilizada em testes e as demais foram utilizadas no treinamento do sistema. Essas partições foram geradas automaticamente 
+utilizando o Matlab
+
+Foram extraidas para cada um limiar as caracteristicas baseada no grau de conectividade e no \emph{joint degree}, sendo a 
+quantidade de características para cada limiar mostrada na tabela \ref{tab:qtdC}
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|]
+		\hline
+		 T & Conectividade & \emph{Joint Degree} & \\
+		\hline
+		 T1 & 20 & 30 \\
+		\hline
+		 T2 & 20 & 30 \\
+		\hline
+		 T3 & 20 & 30 \\
+		\hline
+		 T4 & 20 & 30 \\
+		\hline
+		 T5 & 20 & 30 \\
+		\hline
+		 T6 & 24 & 36 \\
+		\hline
+	\end{tabular}
+	\caption{Quantidade de características para cada limiar e característica diferente}
+	\label{tab:qtdC}
+\end{table} 
+
+Para classificação foram utilizados a LDA e o SVM, validados utilizando a validação cruzada mostrada anteriormente. 
+O resultados obtidos são apresentados nas tabelas %referenciar a tabela de resultados
+
+% \begin{table}[!ht]
+% 	\begin{tabular}[|c|c|c|c|]
+% 		\hline
+% 		 T & Numero de Características& Acuracia de Teste & Acuracia de Treino & \\
+% 		\hline
+% 		 T1 & 30 & 1522 (89,5\%) & 13766 (90,0\%)\\
+% 		\hline
+% 		 T1 & 20 & 1518 (89,3\%) & 13766 (90,0\%)\\
+% 		\hline
+% 		 T2 & 30 & 1519 (89,4\%) & 13764 (90,0\%)\\
+% 		\hline
+% 		 T2 & 20 & 1523 (89,6\%) & 13773 (90,0\%)\\
+% 		\hline
+% 		 T3 & 30 & 1523 (89,6\%) & 13762 (90,0\%)\\
+% 		\hline
+% 		 T3 & 20 & 1522 (89,5\%) & 13763 (90,0\%)\\
+% 		\hline
+% 		 T4 & 30 & 1520 (89,4\%) & 13766 (90,0\%)\\
+% 		\hline
+% 		 T4 & 20 & 1523 (89,6\%) & 13773 (90,0\%)\\
+% 		\hline
+% 		 T5 & 30 & 1518 (89,3\%) & 13777 (90,0\%)\\
+% 		\hline
+% 		 T5 & 20 & 1520 (89,4\%) & 13759 (89,9\%)\\
+% 		\hline
+% 		 T6 & 30 & 1306 (76,8\%) & 11952 (78,1\%)\\
+% 		\hline
+% 		 T6 & 20 & 1311 (77,1\%) & 11920 (77,9\%)\\
+% 		\hline
+% 	\end{tabular}
+% 	\caption{Acurácia da LDA para as características separadas}
+% 	\label{tab:lda2030}
+% \end{table} 
+% \begin{table}[!ht]
+% 	\begin{tabular}[|c|c|c|c|]
+% 		\hline
+% 		 T & Numero de Características& Acuracia de Teste & Acuracia de Treino \\
+% 		\hline
+% 		 T1 & 50 & 1558 (91,6\%) & 14072 (91,9\%)\\
+% 		\hline
+% 		 T2 & 50 & 1549 (91,1\%) & 14063 (91,9\%)\\
+% 		\hline
+% 		 T3 & 50 & 1554 (91,4\%) & 14089 (92,1\%)\\
+% 		\hline
+% 		 T4 & 50 & 1550 (91,1\%) & 14060 (91,8\%)\\
+% 		\hline
+% 		 T5 & 50 & 1553 (91,3\%) & 14058 (91,8\%)\\
+% 		\hline
+% 		 T6 & 60 & 1547 (91,0\%) & 13998 (91,4\%)\\
+% 		\hline
+% 	\end{tabular}
+% 	\caption{Acurácia da LDA para a união das características}
+% 	\label{tab:lda50}
+% \end{table} 
+
+A sensitividade e a especificidade obtidas pelos métodos são mostrafdos nas tabelas \ref{tab:sensC} e \ref{tab:sensL}.
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|c|c|]
+		\hline
+		 T & Sens(Col) & Esp(Col) & Sens(Col) & Esp(Col)\\
+		\hline
+		 T1 & 0,777 & 0,978 & 0,784 & 0,98\\
+		\hline
+		 T1 & 0,77 & 0,979 & 0,783 & 0,981\\
+		\hline
+		 T2 & 0,771 & 0,979 & 0,783 & 0,981\\
+		\hline
+		 T2 & 0,774 & 0,981 & 0,784 & 0,981\\
+		\hline
+		 T3 & 0,778 & 0,978 & 0,783 & 0,981\\
+		\hline
+		 T3 & 0,779 & 0,977 & 0,784 & 0,98\\
+		\hline
+		 T4 & 0,771 & 0,98 & 0,783 & 0,981\\
+		\hline
+		 T4 & 0,776 & 0,98 & 0,785 & 0,981\\
+		\hline
+		 T5 & 0,773 & 0,977 & 0,785 & 0,981\\
+		\hline
+		 T5 & 0,773 & 0,979 & 0,784 & 0,98\\
+		\hline
+		 T6 & 0,741 & 0,787 & 0,751 & 0,799\\
+		\hline
+		 T6 & 0,746 & 0,789 & 0,751 & 0,799\\
+		\hline	
+	\end{tabular}
+	\caption{Sensitividade e especificidade para Coleópteros na LDA com caracteristicas separadas}
+	\label{tab:lda50}
+\end{table} 
+
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|c|c|]
+		\hline
+		 T & Sens(Lag) & Esp(Lag) & Sens(Lag) & Esp(Lag)\\
+		\hline
+		 T1 & 0,978 & 0,777 & 0,98 & 0,784\\
+		\hline
+		 T1 & 0,979 & 0,77 & 0,981 & 0,784\\
+		\hline
+		 T2 & 0,979 & 0,771 & 0,981 & 0,784\\
+		\hline
+		 T2 & 0,981 & 0,774 & 0,981 & 0,785\\
+		\hline
+		 T3 & 0,978 & 0,779 & 0,981 & 0,783\\
+		\hline
+		 T3 & 0,977 & 0,779 & 0,98 & 0,784\\
+		\hline
+		 T4 & 0,98 & 0,771 & 0,981 & 0,783\\
+		\hline
+		 T4 & 0,98 & 0,776 & 0,981 & 0,785\\
+		\hline
+		 T5 & 0,977 & 0,773 & 0,981 & 0,785\\
+		\hline
+		 T5 & 0,979 & 0,773 & 0,98 & 0,784\\
+		\hline
+		 T6 & 0,787 & 0,741 & 0,800 & 0,753\\
+		\hline
+		 T6 & 0,789 & 0,746 & 0,799 & 0,751\\
+		\hline	
+	\end{tabular}
+	\caption{Sensitividade e especificidade para Lagartas na LDA com caracteristicas separadas}
+	\label{tab:lda50}
+\end{table} 
+
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|c|c|]
+		\hline
+		   & \multicolumn{2}[|c|]{Testes} & \multicolumn{2}[|c|]{Treino}\\
+		\hline
+		 T & Sens(Col) & Esp(Col) & Sens(Col) & Esp(Col)\\
+		\hline
+		 T1 & 0,777 & 0,978 & 0,784 & 0,98\\
+		\hline
+		 T1 & 0,77 & 0,979 & 0,783 & 0,981\\
+		\hline
+		 T2 & 0,771 & 0,979 & 0,783 & 0,981\\
+		\hline
+		 T2 & 0,774 & 0,981 & 0,784 & 0,981\\
+		\hline
+		 T3 & 0,778 & 0,978 & 0,783 & 0,981\\
+		\hline
+		 T3 & 0,779 & 0,977 & 0,784 & 0,98\\
+		\hline
+		 T4 & 0,771 & 0,98 & 0,783 & 0,981\\
+		\hline
+		 T4 & 0,776 & 0,98 & 0,785 & 0,981\\
+		\hline
+		 T5 & 0,773 & 0,977 & 0,785 & 0,981\\
+		\hline
+		 T5 & 0,773 & 0,979 & 0,784 & 0,98\\
+		\hline
+		 T6 & 0,741 & 0,787 & 0,751 & 0,799\\
+		\hline
+		 T6 & 0,746 & 0,789 & 0,751 & 0,799\\
+		\hline	
+	\end{tabular}
+	\caption{Sensitividade e especificidade para Coleópteros na LDA com caracteristicas separadas}
+	\label{tab:lda50}
+\end{table} 
+
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|c|c|]
+		\hline
+		   & \multicolumn{2}[|c|]{Testes} & \multicolumn{2}[|c|]{Treino}\\
+		\hline
+		 T & Sens(Lag) & Esp(Lag) & Sens(Lag) & Esp(Lag)\\
+		\hline
+		 T1 & 0,978 & 0,777 & 0,98 & 0,784\\
+		\hline
+		 T1 & 0,979 & 0,77 & 0,981 & 0,784\\
+		\hline
+		 T2 & 0,979 & 0,771 & 0,981 & 0,784\\
+		\hline
+		 T2 & 0,981 & 0,774 & 0,981 & 0,785\\
+		\hline
+		 T3 & 0,978 & 0,779 & 0,981 & 0,783\\
+		\hline
+		 T3 & 0,977 & 0,779 & 0,98 & 0,784\\
+		\hline
+		 T4 & 0,98 & 0,771 & 0,981 & 0,783\\
+		\hline
+		 T4 & 0,98 & 0,776 & 0,981 & 0,785\\
+		\hline
+		 T5 & 0,977 & 0,773 & 0,981 & 0,785\\
+		\hline
+		 T5 & 0,979 & 0,773 & 0,98 & 0,784\\
+		\hline
+		 T6 & 0,787 & 0,741 & 0,800 & 0,753\\
+		\hline
+		 T6 & 0,789 & 0,746 & 0,799 & 0,751\\
+		\hline	
+	\end{tabular}
+	\caption{Sensitividade e especificidade para Lagartas na LDA com caracteristicas separadas}
+	\label{tab:lda50}
+\end{table} 
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|c|c|]
+		\hline
+		   & \multicolumn{2}[|c|]{Testes} & \multicolumn{2}[|c|]{Treino}\\
+		\hline
+		 T & Sens(Col) & Esp(Col) & Sens(Col) & Esp(Col)\\
+		\hline
+		 T1 & 0,871 & 0,945 & 0,879 & 0,949\\
+		\hline
+		 T2 & 0,836 & 0,964 & 0,846 & 0,971\\
+		\hline
+		 T3 & 0,863 & 0,944 & 0,874 & 0,951\\
+		\hline
+		 T4 & 0,866 & 0,942 & 0,875 & 0,951\\
+		\hline
+		 T5 & 0,869 & 0,942 & 0,88 & 0,947\\
+		\hline
+		 T6 & 0,86 & 0,95 & 0,87 & 0,95\\
+		\hline	
+	\end{tabular}
+	\caption{Sensitividade e especificidade para Coleópteros na LDA com junção das características}
+	\label{tab:lda50}
+\end{table} 
+
+
+
+\begin{table}[!ht]
+	\begin{tabular}[|c|c|c|c|c|]
+		\hline
+		   & \multicolumn{2}[|c|]{Testes} & \multicolumn{2}[|c|]{Treino}\\
+		\hline
+		 T & Sens(Lag) & Esp(Lag) & Sens(Lag) & Esp(Lag)\\
+		\hline
+		 T1 & 0,945 & 0,871 & 0,949 & 0,879\\
+		\hline
+		 T2 & 0,964 & 0,836 & 0,971 & 0,846\\
+		\hline
+		 T3 & 0,944 & 0,863 & 0,951 & 0,874\\
+		\hline
+		 T4 & 0,942 & 0,866 & 0,951 & 0,875\\
+		\hline
+		 T5 & 0,942 & 0,869 & 0,947 & 0,88\\
+		\hline
+		 T6 & 0,917 & 0,9 & 0,923 & 0,903\\
+		\hline	
+	\end{tabular}
+	\caption{Sensitividade e especificidade para Lagartas na LDA com junção das características}
+	\label{tab:lda50}
+\end{table} 
+
+
+
+
+
+
+

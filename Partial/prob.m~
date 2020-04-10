@@ -1,0 +1,35 @@
+function [matriz,graus] = prob(a)
+    
+    graus = sum(a);
+    [l c] = size(a);
+    nvert = c;
+    ngraus = nvert-1;   
+    
+    matriz = zeros([ngraus ngraus]);
+    
+    [y,x] = find(a);
+    I = (graus(x)-1)*ngraus + graus(y);
+    I = sort(I);
+    [Il,pFirst] = unique(I,'first');
+    [Il,pLast ] = unique(I,'last');
+    repet = pLast - pFirst ;
+    matriz(Il) = matriz(Il) + repet + 1;
+
+
+
+    nedges = sum(a(:));
+    
+    matriz = matriz/nedges;
+end1)*ngraus + graus(y);
+    I = sort(I);
+    [Il,pFirst] = unique(I,'first');
+    [Il,pLast ] = unique(I,'last');
+    repet = pLast - pFirst ;
+    matriz(Il) = matriz(Il) + repet + 1;
+
+%     for i=1:l
+%         for j=1:c
+%         
+%             if(a(i,j) == 1)
+%                
+%     

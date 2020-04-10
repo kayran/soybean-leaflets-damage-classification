@@ -1,0 +1,38 @@
+function image = removeFundo(IMG,ref)
+
+IMG = removeNoize(IMG);
+
+gray = rgb2gray(IMG);
+level = graythresh(gray);
+bw = im2bw(gray,level);
+ref = im2bw(ref);
+maior =1;
+image = zeros(size(bw));
+
+bw = bw & ref;
+imshow(ref-bw);
+
+%imshow(bw);
+
+[objetos, num] = bwlabel(ref);
+for i = 1:(num)
+    cont = length(find(objetos == i));
+    if((cont > length(find(objetos ==maior))))
+        maior = i;
+    end
+end
+
+%image(objetos ~= maior,:) = 255;
+
+s=size(image);
+ for i = 1:(s(1))
+     for j = 1:(s(2))
+         if(objetos(i,j) ~= maior)
+             
+             image(i,j) = (1-ref(i,j)) & bw(i,j);
+             
+         end
+     end
+ end
+ 
+ image = 1 - image;

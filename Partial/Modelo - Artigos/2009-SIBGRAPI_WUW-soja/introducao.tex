@@ -1,0 +1,37 @@
+A determinação da área foliar é de grande importância para a aplicação de técnicas como poda, adubação e densidade de plantio \cite{gassen:05}. Ela também é um indicativo da produtividade, pois o processo fotossintético depende da interceptação da energia luminosa pela folha \cite{favarin:02}. Ou seja, a superfície foliar de uma planta é a base do rendimento potencial da cultura.
+
+Outra característica que pode ser extraída através da determinação da área foliar é a quantificação dos danos causados por pragas e doenças \cite{tavares:02}. Para o controle das principais pragas é necessário, entre outros requisitos, conhecer os danos já causados na planta. Tais danos podem ser detectados através do estudo da área foliar atingida pelas pragas \cite{borket:94}. A detecção da quantidade precisa da área foliar danificada é essencial para a determinação de ações de controle como aplicação de defensivos, visto que uma pequena área foliar danificada pode dispensar medidas de controle.
+
+Existem vários métodos para medição da área foliar, entretanto, na prática são utilizados principalmente três: a avaliação humana, o método de dimensões foliares e o método de utilização de aparelhos como planímetro e integrador de área \cite{wilcken:98}.
+
+A avaliação humana geralmente é realizada por um especialista (agrônomo). Além de ser um processo impreciso, nem sempre há um profissional disponível para análise da lavoura e dessa forma a demora no diagnóstico pode implicar em futuros prejuízos ao agricultor.
+
+O método de dimensões foliares baseia-se nas dimensões do limbo foliar. 
+Por exemplo, em \cite{bianco:04} são utilizados o comprimento da nervura principal e a largura da folha para estimar a área foliar da erva-do-touro (\emph{Tridax procumbens}) usando uma equação de regressão. 
+Esse método é amplamente empregado no campo, entretanto, a sua aplicação demanda tempo e sua precisão não é satisfatória~\cite{wilcken:98}.
+
+O planímetro é um aparelho que permite medir a área de uma figura plana, por meio de métodos mecânicos. 
+Sua precisão é satisfatória, porém o seu uso torna-se difícil em folhas com bordas irregulares, além de demandar muito trabalho e tempo \cite{goncalves:02}. 
+Os integradores de área foliar (ex.: \emph{LI-COR 3100, Area Meter}) são precisos apenas na medição de área foliar de amostras com o limbo inteiro, portanto não conseguem estimar a área danificada. 
+Outra desvantagem é que eles não são produzidos nacionalmente e por isso são caros e de difícil manutenção e acesso. 
+Os integradores de área são encontrados apenas em grandes laboratórios de pesquisa, o que dificulta o acesso do agricultor a tal tecnologia.
+
+Observa-se assim que mesmo existindo diversas técnicas tradicionais para determinação da área foliar, elas demandam trabalho exaustivo e tempo, além de possuírem certo grau de imprecisão \cite{wilcken:98}. 
+Além disso, as técnicas de medição não são realizadas na maioria das vezes por um agricultor, o que dificulta a agilidade do diagnóstico.
+
+Com os avanços da computação, principalmente na área de Processamento Gráfico (Processamento Digital de Imagens e Visão Computacional), é possível desenvolver métodos de determinação da área foliar alternativos aos métodos clássicos citados. Wilcken \emph{et al.} \cite{wilcken:98} demonstram a viabilidade da utilização de digitalizadores de imagens (\emph{scanner}) como método alternativo na detecção de área foliar consumida por insetos. Einhardt \& Ferreira \cite{einhardt:08} concluíram que um \emph{software} pode ser utilizado na determinação de área foliar, uma vez que mostrou resultados equivalentes aos métodos tradicionais. 
+Mura \emph{et al.} \cite{mura:07} mostraram que o uso de um método de visão computacional, também utilizando imagens adquiridas por um \emph{scanner}, é melhor na determinação do percentual da folha de soja afetada pela lagarta da soja, em relação à avaliação de um agrônomo.
+
+Porém o trabalho desenvolvido em \cite{mura:07} apresenta algumas desvantagens:
+Para que o método funcione corretamente, é necessário que a imagem da amostra foliar esteja livre de impurezas, como ciscos e pequenos pedaços que se desintegram da folha durante o manejo da mesma sobre o \emph{scanner}.
+Ou seja, as imagens devem ser compostas apenas pela amostra foliar e um fundo branco, o que é impraticável em um ambiente agrícola;
+Durante o pré-processamento da imagem não é realizado nenhum tratamento para remoção da sombra que é incorporada à folha durante o processo de varredura ótica para a aquisição da imagem, o que ocasiona uma detecção imprecisa da área foliar;
+E por último, o sistema não possibilita o preenchimento automático de extremidades comprometidas da folha, sendo assim, a área danificada de folhas com grandes danos presentes na borda é detectada de forma insatisfatória.
+
+O presente trabalho propõe um novo método automático de detecção e quantificação automática da área foliar danificada da soja utilizando técnicas de processamento digital de imagens e geometria computacional que trata dos problemas apresentados na literatura como remoção de sombras, eliminação de objetos indesejáveis provenientes da aquisição da imagem e reconstrução de extremidades comprometidas da folha\footnote{Uma versão preliminar deste trabalho que não contempla a remoção das sombras e reconstrução de danos nas bordas das folhas é apresentada em \cite{nazare:08}.}.
+O método proposto também é comparado com avaliações de especialistas humanos e o método de Mura \emph{et al.} \cite{mura:07}.
+
+O restante deste artigo está organizado da seguinte forma.
+Na Seção \ref{metodologia}, são apresentadas as técnicas que constituem o método proposto.
+Os experimentos computacionais são descritos na Seção \ref{testes} e discutidos na Seção \ref{resultados}.
+Finalmente, na Seção \ref{conclusão}, são apresentadas conclusões e propostas de trabalhos futuros.

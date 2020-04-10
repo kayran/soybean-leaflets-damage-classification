@@ -1,0 +1,14 @@
+function extraicontornos(edges)
+    
+ img = ones(size(edges));
+ edges = im2bw(edges);
+ [obj,num] = bwlabel(edges);
+ 
+ for i=1:num
+     
+     img(obj==i
+     
+ end
+  
+
+end

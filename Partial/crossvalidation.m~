@@ -1,0 +1,105 @@
+function [acertos erros] = crossvalidation()
+    nimgs = 1700; %Total de imagens
+    ncol = 700;
+    nlag=1000;
+    t0 = 0.025;
+    tinc = 0.075;
+    tq = 0.875;
+    t = t0:tinc:tq;
+    ncar = length(t)*2; %qtd caracteristicas = tam conj teste
+    tamset = 10*ncar; %Tamanho do conjunto de validação
+    qtdset = nimgs/tamset; %numero de conjuntos por iter
+    niter = ceil(30/qtdset); %qtd de iterações
+    qcol = ceil((ncol/nimgs)*tamset); %coleopteros por conjunto
+    qlag = tamset - qcol; %lagartas por conjunto
+    modc = mod(qcol,10);
+    modl = mod(qlag,10);
+    if(modc>modl)
+        qcol = qcol+modl;
+        qlag = qlag-modl;
+    end
+    [setsc setsl] = generatesets(qcol,qlag,ncol,nlag,niter,qtdset);
+    acertos = zeros(niter,qtdset);
+    erros = zeros(niter,qtdset);
+    tamset
+    tcol = floor(qcol/10)
+    tlag = uint32(tamset/10) - tcol;
+    conf = zeros(2,2);
+    max = 0;
+    for i=1:niter
+        for j=1:qtdset
+            acertos(i,j) = 0;
+            erros(i,j) = 0;
+            for p=1:10
+                p
+                [x1 x2 u1 u2] = normaliza(p,t,setsc(i,j,:),setsl(i,j,:));
+                
+                c1 = cov(x1);
+                c2 = cov(x2);
+                [l1 c] = size(x1);
+                [l2 c] = size(x2);
+                c
+                for k=1:ncar
+
+                    if(k<=tcol)
+                        imname = (p-1)*tcol + k;
+                        classe = 'coleoptero';
+                        input = ['coleoptero/coleoptero'];
+                        csup = 1;
+                        cerr = 2;
+                        input = [input int2str(setsc(i,j,imname)) '.bmp'];
+                    else
+                        imname = (p-1)*tlag + k-tcol;
+                        classe = 'lagarta';
+                        input = ['lagarta/lagarta'];
+                        csup = 2;
+                        cerr = 1;
+                        input = [input int2str(setsl(i,j,imname)) '.bmp'];
+                    end
+                    fprintf('i=%d j=%d im=%d',i,j,imname);
+                    img =imread(input);
+                    resposta = discfunction(img, c1, c2, l1, l2, u1, u2,t);
+
+                    if(strcmp(classe,resposta))
+                        acertos(i,j) = acertos(i,j) +1;
+                        conf(csup,csup) = conf(csup,csup)+1;
+                        max = max+1;
+                    else
+                        erros(i,j) = erros(i,j) +1;
+                        conf(csup,cerr) = conf(csup,cerr)+1;
+                        max=max+1;
+                    end
+                    ac = acertos(i,j)
+                    er = erros(i,j)
+                end
+            end
+            
+        end
+    end
+    arq = fopen('results.txt','w');
+    fprintf(arq,'erros: %d\n',erros);
+    fprintf(arq,'acertos: %d\n',acertos);
+    fprintf(arq,'\n');
+    acertos = (acertos/tamset)*100;
+    erros = (erros/tamset)*100;    
+    fprintf(arq,'erros: %d\n',erros);
+    fprintf(arq,'acertos: %d\n\n',acertos);
+    fprintf(arq,'\nmedia erros: %f\n',mean2(erros));
+    fprintf(arq,'media acertos: %d\n\n',mean2(acertos));
+    fprintf(arq,'\nstd erros: %d\n',std(erros(:)));
+    fprintf(arq,'std erros: %d\n\n',std(acertos(:)));
+    fprintf(arq,'\nMatriz de Confusão: \n');
+    fprintf(arq,'|     ||  1  ||  2  |');
+    fprintf(arq,'|%d|',conf(1,:));
+    fprintf(arq,'\n');
+    fprintf(arq,'|%d|',conf(2,:));
+    fprintf(arq,'\n');
+    conf = conf/max;
+    fprintf(arq,'\nMatriz de Confusão: \n');
+    fprintf(arq,'|     ||  1  ||  2  |');
+    fprintf(arq,'|%d|',conf(1,:));
+    fprintf(arq,'\n');
+    fprintf(arq,'|%d|',conf(2,:));
+    fprintf(arq,'\n');
+    fclose(arq);
+end

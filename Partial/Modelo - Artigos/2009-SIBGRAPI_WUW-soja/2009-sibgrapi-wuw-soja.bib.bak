@@ -1,0 +1,180 @@
+@misc{web:2009,
+ author       = {A.C. Nazaré-Jr},
+ title        = {Sistema de avaliação foliar da Soja},
+ howpublished = {\url{www.iceb.ufop.br/decom/lapdi/soja}},
+ year         = {2009}
+}
+
+@Book{gassen:05,
+ title = {Doenças Foliares em Soja},
+ publisher = {Aldeia Norte},
+ year = {2005},
+ author = {Flávio R. Gassen and Dirceu N. Gassen},
+ edition = {1a. Edição}
+}
+
+@Article{favarin:02,
+ author = {J. L. Favarin and D. Dourado-Neto and A. G. García and N. A. V. Nova and M. G. G. V. Favarin},
+ title = {Equações para a estimativa do índice de área foliar do cafeeiro},
+ journal = {Pesquisa Agropecuária Brasileira},
+ year = {2002},
+ volume = {37},
+ number = {6},
+ pages = {769-773},
+ month = {junho}
+}
+
+@Article{tavares:02,
+ author = {J. E. Tavares-Júnior and J. L. Favarin and D. Dourado-Neto and A. H. N. Maia and L. C. Fazuoli and M. S. Bernardes},
+ title = {Análise comparativa de métodos de estimativa de área foliar em cafeeiro},
+ journal = {Bragantia},
+ year = {2002},
+ volume = {61},
+ number = {2},
+ pages = {199-203},
+ month = {maio/agosto},
+ address = {Campinas}
+}
+
+@Article{borket:94,
+ author = {C. M. Borkert and J. T. Yorinori and B. S. Corrêa-Ferreira and Á. M. R. Almeida and L. P. Ferreira and G. J. Sfredo},
+ title = {Seja o doutor da sua soja - Pragas: diagnóstico e controle},
+ journal = {Informações Agronômicas},
+ year = {1994},
+ number = {66},
+ pages = {7-8},
+ month = {junho},
+}
+
+@Article{wilcken:98,
+ author = {C. F. Wilcken and R. C. B. Moraes and M. L. Haddad and J. R. P. Parra},
+ title = {Técnica de medição de área foliar consumida por insetos através de digitalizador de imagens},
+ journal = {Scientia Agrícola},
+ year = {1998},
+ volume = {55},
+ number = {2},
+ pages = {218-221},
+ month = {maio/agosto},
+
+}
+
+@Article{bianco:04,
+ author = {S. Bianco and R. A. Pitelli and L. B. Carvalho},
+ title = {Estimativa da área foliar de Tridax procumbens usando dimensões lineares do limbo foliar},
+ journal = {Planta Daninha},
+ year = {2004},
+ volume = {22},
+ number = {2},
+ pages = {247-250},
+ month = {abril/junho},
+}
+
+@Article{goncalves:02,
+ author = {C. A. A. Gonçalves and N. N. J. Chalfun and M. A. Regina and A. A. Alvarenga and M. T. Souza and E. Abrahão},
+ title = {Estimativa de Área Foliar da Videira sobre diferentes Porta-Enxertos},
+ journal = {Ciência e Agrotecnologia},
+ year = {2002},
+ volume = {26},
+ number = {3},
+ pages = {500-504},
+ month = {maio/junho},
+}
+
+@InProceedings{einhardt:08,
+ author = {P. M. Einhardt and O. G. L. Ferreira},
+ title = {Validação de um método digital para determinação de área foliar},
+ booktitle = {XVII Congresso de Iniciação Científica e X Encontro de Pós-Graduação},
+ pages = {1-4},
+ year = {2008},
+ address = {Pelotas},
+ month = {novembro},
+}
+
+@InProceedings{mura:07,
+ author = {W. D. Mura and A. L. Oliveira and E. M. Sgarbi and L. G. Sachs},
+ title = {Detecção automática da área foliar da soja danificada pela lagarta (\textit{Anticarsia gemmatalis}) utilizando processamento digital de imagens},
+ booktitle = {Anais Eletrônicos do Workshop de Trabalhos de Graduação - SIBGRABI 2007},
+ pages = {1-4},
+ year = {2007},
+}
+
+@InProceedings{nazare:08,
+ author = {A. C. Nazaré-Júnior and D. Menotti and T. Sediyama and J. M. R. Neves},
+ title = {Detecção da área foliar danificada de soja},
+ booktitle = {7º Congresso Brasileiro de Agroinformática - SBIAgro},
+ note = {submetido},
+ year = {2009}
+}
+
+@Book{pedrini:08,
+ author = {H. Pedrini and W. R. Schwartz},
+ title = {Análise de Imagens Digitais},
+ publisher = {Thomson},
+ year = {2008},
+ edition = {1a. Edição},
+ address ={São Paulo}
+}
+
+@Article{shugen:03,
+ author = {W. Shugen and G. Zejin and L. Deren},
+ title = {Shadow detection and compensation for color aerial images},
+ journal = {Geo-Spatial Information Science},
+ year = {2003},
+ volume = {6},
+ number = {3},
+ pages = {20-24},
+ OPTmonth = {setembro},
+}
+
+@Book{gonzalez:08,
+ author	= {R. C. Gonzalez e R. E. Woods},
+ title = {Digital Image Processing},
+ publisher = {Prentice Hall},
+ year = {2008},
+ edition = {3a. Edição},
+ pages = {954},
+}
+
+@Article{he:08,
+ author = {X. Chen-He and N. H. C. Yung},
+ title = {Corner detector based on global and local curvature properties},
+ journal = {Optical Engineering},
+ year = {2008},
+ volume = {47},
+ number = {5},
+ pages = {057008 1-12},
+ month = {maio},
+}
+
+@Book{azevedo:03,
+ author	= {E. Azevedo and A. Conci},
+ title = {Computação Gráfica: Teoria e Prática},
+ publisher = {Campus},
+ year = {2003},
+ edition = {1a. Edição},
+ pages = {954},
+ address = {Rio de Janeiro}
+}
+
+Freund, J. E. (2006), Estatística Aplicada: economia, administração e contabilidade, 11 ed., Porto Alegre: Bookman.
+
+@InBook{picanco:09,
+ author = {M. C. Picanço and F. L. Fernandes and E. G. F. Morais and M. R. Campos and V. M. Xavier},
+ title = {Tecnologias de Produção e Usos da Soja},
+ chapter = {Manejo Integrado das Pragas},
+ publisher = {Mecenas},
+ year = {209},
+ editor = {Tuneo Sekiyama},
+ address = {Londrina},
+ pages = {119-132}
+}
+
+@Book{triola:99,
+ author	= {M. F. Triola},
+ title = {Introdução à Estatistica},
+ publisher = {LTC},
+ year = {1999},
+ edition = {7a. Edição},
+ pages = {410},
+ address = {Rio de Janeiro}
+}

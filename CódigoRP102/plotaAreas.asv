@@ -1,0 +1,20 @@
+function vetor = plotaAreas(areas,tamclasse)
+
+    nclasses = uint8(max(areas)/tamclasse)
+    vetor = zeros([1 nclasses]);
+    menor = min(areas)
+    maior = max(areas)
+    s = size(areas);
+    s = s(2);
+    for i = 1:(s)
+        areas(i)
+        x = (areas(i)/maior)*(nclasses-1)+1;
+        x = uint8(x);
+        
+        vetor(x) = vetor(x) +1;
+    end
+    
+    
+    
+end
+

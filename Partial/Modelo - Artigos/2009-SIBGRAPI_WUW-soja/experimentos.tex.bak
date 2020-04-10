@@ -1,0 +1,112 @@
+\fnbelowfloat
+\begin{table*}[!htb]
+  \begin{center}
+  \caption{EAM e ERM dos métodos avaliados para cada intervalo de porcentagem de área foliar danificada.}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|}
+
+\hline
+ Grupo &   & \multicolumn{2}{|c|}{\emph{Humano}} &  \multicolumn{2}{|c|}{\emph{Mura-07}} &  \multicolumn{2}{|c|}{\emph{Proposto}}   \\
+\cline{3-8}
+ \% & F & EAM (\%) & ERM (\%) &  EAM (\%) & ERM (\%) &  EAM (\%) & ERM (\%) \\
+
+      \hline
+      0 |--- 5 & 54 & $2,90 \pm 2,48$ & $86,43 \pm 93,43$ & $0,53 \pm 0,50$ & $17,25 \pm 20,65$ &  $0,37 \pm 0,56$ & $12,26 \pm 25,19$ \\
+
+      5 |--- 10 & 40 & $5,54 \pm 3,73$ & $73,71 \pm 46,72$ & $1,13 \pm 0,75$ & $ 15,25 \pm 9,17 $ & $0,65 \pm 0,50$ & $8,86 \pm 6,39$ \\
+
+      10 |--- 15 & 31 & $6,35 \pm 4,34$ & $50,91 \pm 34,36$ & $1,93 \pm 1,88$ & $15,64 \pm 15,82$ & $1,08 \pm 1,20$ & $8,74 \pm 9,88$ \\
+
+      15 |--- 20 & 13 & $9,61 \pm 5,26$  & $59,64 \pm 33,46$ & $3,77 \pm 3,81$ & $23,28 \pm 23,87$ &  $2,05 \pm 2,13$ & $12,63 \pm 13,36$ \\
+
+      20|---99 & 10 & $14,93 \pm 10,42$ & $54,95 \pm 34,36$ & $6,32 \pm 3,76$ & $22,99 \pm 10,07$ &  $2,58 \pm 2,07$ & $9,18 \pm 4,86$ \\
+      \hline
+      \hline
+      \textbf{TOTAL} & \textbf{148} & $\mathbf{5,74 \pm 5,36}$ & $\mathbf{71,07 \pm 65,84}$ & $\mathbf{1,66 \pm 2,33}$ & $\mathbf{17,29 \pm 16,94}$ & $\mathbf{0,89 \pm 1,24}$ & $\mathbf{10,43 \pm 16,69}$ \\
+      \hline
+
+    \end{tabular}
+    \label{taberro}
+  \end{center}
+\end{table*}
+
+Para realização de experimentos para validação do nosso método foi construída uma base de $148$ amostras foliares de Soja (\emph{Glycine max (L.) Merrill}) colhidas ao acaso em diferentes posições do dossel de plantas tomadas ao acaso em campos experimentais do Departamento de Fitotecnia da Universidade Federal de Viçosa.
+Para aquisição das imagens foi utilizado um \emph{scanner} de mesa da marca HP, modelo \emph{Scanjet G2410}, acoplado a um computador.
+
+As imagens das amostras foram armazenadas no formato BMP (\emph{Bitmap}) - sem compactação, com resolução de $200$ dpi (``\emph{Dots per inch}'' - pontos por polegada) e 24 \emph{bits} por \emph{pixel} (colorida).
+
+Os valores de áreas danificadas detectadas em folhas (\emph{i.e.}, avaliação) por nosso método (\emph{Proposto}) foram comparados com os valores obtidos pelo método proposto em \cite{mura:07} (\emph{Mura-07}).
+Ressalte-se que esses dois métodos utilizam  imagens digitais.
+Ainda, os valores obtidos por esses métodos foram confrontados com a avaliação humana (\emph{Humano}).
+
+Os métodos \emph{Proposto} e \emph{Mura-07} foram implementados em \emph{Matlab} e executados em um computador com sistema operacional \emph{GNU/Linux Ubuntu 9.04}.
+Nos testes realizados em \cite{mura:07} as imagens foram adquiridas utilizando como fundo uma folha de papel branco com o propósito de eliminar essas impurezas, uma vez que elas influenciam no resultado obtido pelo método.
+Então, para uma comparação justa, na avaliação do método \emph{Mura-07} foi incluído a etapa de retirada de impurezas da imagem como ciscos e pequenos pedaços de folha.
+
+Os resultados da avaliação dos métodos utilizando imagens digitais são as porcentagem de área foliar danificada estimada para cada amostra.
+O terceiro método constitui-se de uma avaliação realizada por alunos da disciplina FIT 442 - Culturas de Soja, Sorgo e Trigo, oferecida pelo Departamento de Fitotecnia da Universidade Federal de Viçosa, já capacitados para fazerem a análise foliar de uma cultura.
+Para tanto foi desenvolvido um sistema \emph{web}~\cite{web:2009} em que cada amostra foliar (imagem) era apresentada a quatro alunos distintos para realizar sua avaliação atribuindo valores de porcentagem da área foliar danificada.
+Também foi tomado o cuidado de existir a menor interseção possível entre as amostras avaliadas por mesmos alunos.
+O resultado final da estimativa de cada amostra foi a média aritmética das quatro avaliações.
+
+Como referência para os experimentos, as imagens das amostras foram submetidas a um processo de segmentação e reconstrução manual (supervisionado por um especialista da área de fitotecnia).
+Neste processo de segmentação manual, para cada amostra foram geradas duas imagens de referência/\emph{ground-truth}: danificada e reconstruída.
+Usando essas imagens e a Equação~\ref{eq:pct} para quantificação da área danificada, é possível estabelecer a porcentagem ideal de danos, \emph{i.e.}, $P_{ref}$.
+As imagens da Figura~\ref{fig:manual} ilustram o processo manual de segmentação e reconstrução, onde a imagem original é apresentada na Figura~\ref{subfig:manualinicial}, o resultado da segmentação manual de referência é apresentado na imagem da Figura~\ref{subfig:msegmentada} e a Figura~\ref{subfig:manualfinal} apresenta a imagem de referência reconstruída.
+
+\begin{figure}[!ht]
+    \centering
+    \subfigure[][]{\includegraphics[width=2.5 cm]{figures/manualinicial.jpg}\label{subfig:manualinicial}}
+    \subfigure[][]{\includegraphics[width=2.5 cm]{figures/manualsegmentada.jpg}\label{subfig:msegmentada}}
+    \subfigure[][]{\includegraphics[width=2.5 cm]{figures/manualfinal.jpg}\label{subfig:manualfinal}}
+    \caption{Segmentação manual. (a) imagem original; (b) imagem segmentada; (c) imagem final. \label{fig:manual}}
+  \end{figure}
+
+Foram calculados o erro absoluto ($\xi A_x$) e o erro relativo ($\xi R_x$) do método $x$  para cada amostra, \emph{i.e.},
+
+\begin{equation}
+  \xi A_x = |P_{ref} - P_x|,
+  \label{eq:erroabsoluto}
+\end{equation}
+\
+\begin{equation}
+  \xi R_x =
+  \left\{
+  \begin{array}{ll}
+	  \displaystyle \frac{|P_{ref} - P_x|}{P_{ref}},\hspace{0.2cm}se\hspace{0.2cm}P_{ref} \geq 1\% \\
+	  \\
+	  \displaystyle |P_{ref} - P_x|,\hspace{0.2cm}se\hspace{0.2cm}P_{ref} < 1\%
+  \end{array}
+  \right.
+  \label{eq:errorelativo}
+\end{equation}
+\noindent onde $P_x$ é o resultado estimado pelo método.
+
+A necessidade de se testar $P_{ref}$ na Equação \ref{eq:errorelativo} se justifica pelo fato de que para amostras que apresentassem uma área danificada inferior à $1\%$ o valor de $\xi R_x$ seria tendencioso, pois:
+
+\[
+    \lim_{P_{ref} \to 0^+}\frac{|P_{ref} - P_x|}{P_{ref}} = +\infty
+\]
+
+
+Segundo \cite{picanco:09}, medidas de controle devem ser tomadas quando é detectada uma área foliar danificada por pragas acima de 15\% em plantas adultas de soja. Esta análise é de suma importância para o agricultor, porque uma indicação incorreta pode acarretar em gastos desnecessários e/ou perda da produção. Por esta razão foi realizada uma avaliação dos métodos em relação às indicações de medida de controle, analisando para cada amostra qual a decisão a ser tomada de acordo com o que o método indica e comparando-se com a decisão verdadeira indicada pela porcentagem ideal de área foliar danificada.
+
+Por fim, os métodos \emph{Proposto} e \emph{Mura-07} geraram duas imagens finais que foram submetidas a um teste de comparação de imagens com a finalidade de avaliar a capacidade de segmentação e reconstrução dos métodos. Para cada método foi gerada a matriz confusão entre as suas imagens finais (observada) e as imagens de referência (ideal).
+A matriz confusão quantifica a semelhança de uma imagem observada com uma imagem ideal, ambas binárias ($0$ ou $1$) e com dimensão $L \times A$. Sendo necessário comparar o pixel $P^{Obs}_{ij}$ com o pixel  $P^{Ideal}_{ij}$, para $i=1,2,\ldots,A$ e $j=1,2,\ldots,L$ dividindo-os nas seguintes classes:\newline
+
+\begin{itemize}
+ \item \textbf{TP(\emph{Verdadeiro-Positivo}): }$P^{Ideal}_{ij} = 1 \wedge P^{Obs}_{ij} = 1$;\\
+ \item \textbf{FN(\emph{Falso-Negativo}): }$P^{Ideal}_{ij} = 1 \wedge P^{Obs}_{ij} = 0$;\\
+ \item \textbf{FP(\emph{Falso-Positivo}): }$P^{Ideal}_{ij} = 0 \wedge P^{Obs}_{ij} = 1$;\\
+ \item \textbf{TN(\emph{Verdadeiro-Negativo}): }$P^{Ideal}_{ij} = 0 \wedge P^{Obs}_{ij} = 0$;\\
+\end{itemize}
+
+Após a classificação é calculado o somatório de cada classe. A Figura \ref{fig:matriz} ilustra a estrutura de uma matriz confusão.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=4 cm]{figures/matriz.jpg}
+  \caption{Estrutura da matriz de confusão.}
+  \label{fig:matriz}
+\end{figure}
+
+Os resultados dos testes, as imagens das amostras e o código fonte estão disponíveis em \cite{web:2009}. 

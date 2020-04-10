@@ -1,0 +1,183 @@
+O método proposto neste trabalho é constituído de várias etapas de técnicas de processamento de imagens e geometria computacional aplicadas a imagem colorida da amostra foliar.
+Essas etapas são apresentadas a seguir.
+
+\subsection{Pré-processamento}
+
+Primeiramente é realizada a eliminação da sombra da folha.
+Para tanto a imagem é convertida do espaço de cores \emph{RGB} (\emph{R} - \emph{red}, \emph{G} - \emph{green} e \emph{B} - \emph{blue}) para o sistema \emph{HSV} (\emph{H} - \emph{hue}, \emph{S} - \emph{saturation} e \emph{V} - \emph{value}) ~\cite{pedrini:08}.
+Segundo \cite{shugen:03}, no espaço de cores \emph{HSV} os \emph{pixels} da região de sombra apresentam as seguintes características: alto tom (ou matiz - \emph{H}), alta saturação (\emph{S}) e baixa intensidade(\emph{V}).
+Neste trabalho, somente o alto tom (\emph{hue}) foi condição suficiente para a detecção da sombra presente na imagem da amostra foliar.
+No espaço \emph{HSV}, o tom (\emph{H}) representa a cor propriamente dita (\emph{e.g.}, verde, vermelho, azul, laranja, \emph{etc.}), e é definido como um ângulo (no intervalo $[0, 360)$), como ilustra a Figura~\ref{subfig:hsv}.
+
+\begin{figure}[!ht]
+  \centering
+  \subfigure[][]{\includegraphics[width=6 cm]{figures/hsv.jpg}\label{subfig:hsv}}
+  %\qquad
+  \subfigure[][]{\includegraphics[width=7 cm]{figures/histograma.jpg}\label{subfig:histograma}}
+  \caption{Detecção da sombra. (a) variação do tom ($hue$) do modelo $HSV$; (b) Histograma médio das imagens das amostras foliares. \label{fig:hsv}}
+\end{figure}
+
+A Figura \ref{subfig:histograma} apresenta o histograma médio do canal $H$ de $148$ imagens de amostras foliares adquiridas através do \emph{scanner}.
+É possível perceber que esse histograma apresenta um comportamento bimodal, destacando-se a classe de \emph{pixels} com valores de $hue$ inferiores a $108\ensuremath{^\circ}$.
+Esses valores representam a amostra foliar.
+Os pixels do fundo da imagem (a região predominantemente branca) possui valor de \emph{hue} indefinido, pois não armazenam informação de cor, por isso seus valores foram desconsiderados por não serem relevante ao estudo.
+
+Ainda, analisando o histograma, pode-se induzir que os \emph{pixels} com valores acima de $108\ensuremath{^\circ}$ pertencem a pequena região de sombra, como fica evidente em um exemplo illustrativo das imagens das Figuras~\ref{subfig:rgb} e~\ref{subfig:canalH} (onde a sombra é representada pelas regiões mais claras - imagem normalizada: $0\ensuremath{^\circ}$ está para nível 0, \emph{i.e.}, o preto, enquanto que o maior ângulo possível está para o nível 255, \emph{i.e.}, o branco).
+A Figura~\ref{subfig:semsombra} ilustra a primeira operação de pré-processamento, onde os \emph{pixels} classificados como sombra são subtraídos e a imagem é convertida para tons de cinza ($8$ \emph{bits}) com o propósito de diminuir o volume de informação a ser processado.
+
+Na segunda parte do pré-processamento, é aplicado o filtro da mediana \cite{gonzalez:08} utilizando uma janela de \emph{pixels} de dimensão $3 \times 3$ para diminuição de ruídos provenientes da digitalização e também imperfeições da folha como pequenas manchas.
+Isto facilita o processo de segmentação que será apresentado na Seção \ref{segmentacao}.
+O filtro da mediana consiste em substituir o valor de um \emph{pixel} pela mediana do espaço amostral formado por ele e seus oito vizinhos (laterais e diagonais).
+A imagem da Figura \ref{subfig:mediana} ilustra o resultado deste processo utilizando a imagem da Figura~\ref{subfig:semsombra} como entrada.
+
+\begin{figure}[!ht]
+  \centering
+  \subfigure[][]{\includegraphics[width=2 cm]{figures/color.jpg}\label{subfig:rgb}}
+  %\qquad
+  \subfigure[][]{\includegraphics[width=2 cm]{figures/canalH.jpg}\label{subfig:canalH}}
+  %\qquad
+  \subfigure[][]{\includegraphics[width=2 cm]{figures/notshadow.jpg}\label{subfig:semsombra}}
+  %\qquad
+  \subfigure[][]{\includegraphics[width=2 cm]{figures/median.jpg}\label{subfig:mediana}}
+  \caption{Pré-processamento. (a) imagem original; (b) sombra detectada no canal \emph{H} (regiões claras); (c) conversão para níveis de cinza e eliminação da sombra; (d) aplicação do filtro da mediana.}
+  \label{fig:preprocessamento}
+\end{figure}
+
+\subsection{Segmentação}\label{segmentacao}
+
+Segmentar uma imagem, neste contexto, consiste em separar o objeto (amostra foliar) do fundo da imagem. A segmentação foi realizada pelo algoritmo de limiarização automática de Otsu \cite{gonzalez:08}.
+Esta técnica considera que o histograma de uma imagem é composto de duas classes, \emph{i.e.}, os \emph{pixels} do objeto (folha) e os \emph{pixels} do fundo. O que distingui estas duas classes é um valor global chamado de limiar, que é calculado automaticamente pelo algoritmo de Otsu, maximizando a variância entre as classes objeto e fundo. Assim, todos os \emph{pixels} com valores abaixo deste limiar são classificados como objeto e os demais são classificados como fundo. A filtragem da imagem foi importante para esta etapa, pois facilita a identificação de um limiar ótimo para a imagem. A Figura \ref{fig:segmentacao} ilustra o processo de segmentação.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=6 cm]{figures/seg.jpg}
+  \caption{Resultado da operação de segmentação.}
+  \label{fig:segmentacao}
+\end{figure}
+
+\subsection{Eliminação de objetos indesejáveis}\label{rotulacao}
+
+Após a segmentação a imagem pode apresentar outros objetos que não sejam integrantes da amostra foliar, como ciscos e pequenos pedaços que se desintegram da amostra principal.
+Para contornar este problema foi aplicado um algoritmo de rotulação \cite{pedrini:08}, que consiste em identificar todos os objetos conexos presentes na imagem. São considerados objetos, regiões que apresentem \emph{pixels} com valor $0$ (preto).
+Após a identificação são excluídos todos os objetos exceto o de maior tamanho que é a amostra foliar a ser analisada.
+Um exemplo da existência de objetos indesejáveis após a segmentação é apresentado pelas Figuras \ref{subfig:regions1} e \ref{subfig:regions2}.
+
+\begin{figure}[!ht]
+  \centering
+  \subfigure[][]{\includegraphics[width=2.5 cm]{figures/regions1.jpg}\label{subfig:regions1}}
+  \subfigure[][]{\includegraphics[width=2.5 cm]{figures/regions2.jpg}\label{subfig:regions2}}
+  \subfigure[][]{\includegraphics[width=2.5 cm]{figures/regionsfinal.jpg}\label{subfig:regionsfinal}}
+  \caption{Algoritmo de rotularização. (a) imagem original; (b) imagem segmentada contendo objetos indesejáveis; (c) imagem final ($I_{segmentada}$). \label{fig:regions}}
+\end{figure}
+
+Esses objetos indesejáveis, caso presentes na imagem, influenciam na quantificação precisa da área foliar danificada.
+
+O resultado final desta etapa (um exemplo ilustrativo é a imagem da Figura \ref{subfig:regionsfinal}) é a imagem que será utilizada como base inicial para as próximas etapas e também para o cálculo da área foliar danificada.
+Essa será denominada como $I_{segmentada}$.
+
+
+\subsection{Recuperação dos danos internos da folha}\label{internos}
+
+Nesta etapa é realizada uma detecção intermediária dos danos da amostra.
+Ou seja, os danos internos da folha são reconstituídos a fim de formar um único objeto sólido, como o ilustrado na Figura \ref{subfig:ifinal}.
+Para realizar esta tarefa, também é utilizado o algoritmo de rotulação apresentado na Seção \ref{rotulacao}, com a diferença de que nesta etapa ele detecta as regiões com \emph{pixels} de valor igual a $1$ (branco).
+Desta maneira todos os objetos identificados são reconstruídos, exceto aqueles que estão conectado à borda, pois estes representam o fundo da imagem.
+Na Figura \ref{subfig:iobjetos}, as regiões em verde representam quais objetos permanecerão na imagem da Figura~\ref{subfig:idanos}, enquanto que as regiões em vermelho representam os objetos que serão excluídos, que são de fato os furos internos da folha a serem reconstruídos.
+
+\begin{figure}[!ht]
+  \centering
+  \subfigure[][]{\includegraphics[width=2.5 cm]{figures/idanos.jpg}\label{subfig:idanos}}
+  \subfigure[][]{\includegraphics[width=2.5 cm]{figures/iobjetos.jpg}\label{subfig:iobjetos}}
+  \subfigure[][]{\includegraphics[width=2.5 cm]{figures/ifinal.jpg}\label{subfig:ifinal}}
+  \caption{Recuperação dos danos internos. (a) Imagem inicial $I_{segmentada}$; (b) Objetos detectados; (c) Amostra com a área interna recuperada. \label{fig:interno}}
+\end{figure}
+
+
+\subsection{Reconstituição das extremidades comprometidas}
+
+Para a detecção da área danificada presente nas extremidades da folha (\emph{i.e.}, regiões concavas) é necessária uma reconstituição da borda.
+Tal operação é realizada pelos seguintes passos:
+
+\subsubsection{Detecção de corners}
+primeiramente são detectados os pontos de \emph{corner} da folha.
+Um \emph{corner} é um ponto da curva que apresenta uma alta curvatura, ou seja, são pontos de canto.
+Esta operação é realizada através do método proposto por \cite{he:08}.
+O algoritmo procede da seguinte maneira:
+
+\begin{description}
+ \item[a)] \emph{Contorno: }Primeiramente é extraído o contorno da amostra através do algoritmo de \emph{Canny};
+ \item[b)] \emph{Cálculo da Curvatura: }É calculada a curvatura em todos os pontos pertencentes ao contorno;
+ \item[c)] \emph{Candidatos à \emph{corners}: }Todos os pontos que apresentem curvatura máxima local são adicionados à lista de candidatos a \emph{corners};
+ \item[d)] \emph{Eliminação: }Por último são excluídos da lista os \emph{corners} arredondados e aqueles que apresentem ângulo obtuso, considerados falsos. As Figuras \ref{subfig:round} e \ref{subfig:obtuse} apresentam exemplos de \emph{corners} arredondados e obtusos, respectivamente.
+\end{description}
+
+\begin{figure}[!ht]
+  \centering
+  \subfigure{\includegraphics[width=3 cm]{figures/round.jpg}\label{subfig:round}}
+  \subfigure{\includegraphics[width=4.35 cm]{figures/obtuse.jpg}\label{subfig:obtuse}}
+  \caption{Exemplos de corner: (a) arredondado; (b) de ângulo obtuso. \label{fig:cornerspoints}}
+\end{figure}
+
+A Figura \ref{fig:corners} apresenta os pontos de \emph{corners}, em vermelho, detectados em uma amostra.
+Estes pontos são possíveis candidatos a pontos de ruptura do contorno da folha.
+Ou seja, são pontos onde é interrompida a curvatura natural da borda da amostra foliar e serão utilizados para a determinação de estimativas para a reconstituição das extremidades danificadas.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=4cm]{figures/corners.jpg}
+  \caption{Pontos de \emph{corners} detectados.}
+  \label{fig:corners}
+\end{figure}
+
+\subsubsection{Reconstituição da borda} seja o conjunto $C=\{P_1,P_2,P_3,\ldots,P_n\}$ de pontos de \emph{corners} detectados.
+Defini-se o conjunto $R$, como sendo o conjunto de segmentos de retas gerado a partir da combinação de todos os elementos de $C$, tomados dois a dois, \emph{i.e.},
+\begin{equation}
+R = \{\overline{P_i P_{i+1}}, \overline{P_iP_{i+2}}, \ldots, \overline{P_{n-1} P_n}\},
+\end{equation}
+onde $i=1,2,3,\ldots,n-1$ e $\overline{P_i P_j}$ é o segmento de reta traçado entre os pontos de \emph{corner} $P_i$ e $P_j$.
+
+Um exemplo ilustrativo do resultado deste processo é apresentado na Figura \ref{fig:retas}.
+Os segmentos de retas foram traçados através do algoritmo de Bresenham \cite{azevedo:03}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=4 cm]{figures/retas.jpg}
+  \caption{Segmentos de reta traçados entre os pontos de \emph{corner}.}
+  \label{fig:retas}
+\end{figure}
+
+Após serem traçados os segmentos de retas é aplicado novamente o processo apresentado na Seção \ref{internos} para recuperação das regiões internas danificadas da amostra.
+Assim é gerada a imagem final reconstituída (Figura \ref{fig:final}), aqui denominada de $I_{final}$.
+Esta imagem, juntamente com $I_{segmentada}$, será utilizada para a quantificação da área danificada.
+Note que neste etapa não houve uma preocupação em gerar somente os segmentos de retas mais externos a amostra foliar, visto que o número de segmentos gerados é facilmente computável.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=4 cm]{figures/final.jpg}
+  \caption{Imagem final reconstituída da amostra}
+  \label{fig:final}
+\end{figure}
+
+\subsection{Quantificação}\label{quantificação}
+
+A determinação da área foliar danificada é realizada de maneira simples:
+Subtrai-se, a imagem $I_{segmentada}$ da imagem $I_{final}$, assim obtendo-se a imagem $I_{danos}$.
+A Figura \ref{subfig:fdanos} ilustra a imagem resultante da subtração das imagens \ref{subfig:ffinal} e \ref{subfig:fsegmentada}.
+
+\begin{figure}[!ht]
+  \centering
+  \subfigure{\includegraphics[width=2.5 cm]{figures/final2.jpg}\label{subfig:ffinal}}
+  \subfigure{\includegraphics[width=2.5 cm]{figures/idanos.jpg}\label{subfig:fsegmentada}}
+  \subfigure{\includegraphics[width=2.5 cm]{figures/danos.jpg}\label{subfig:fdanos}}
+  \caption{Determinação da área foliar danificada. (a) $I_{final}$; (b) $I_{segmentada}$; (c) $I_{danos}$. \label{fig:quant}}
+\end{figure}
+
+A quantidade, em \emph{pixels}, da área foliar danificada é determinada por $I_{danos}(0)$, que corresponde ao número de \emph{pixels} de valor $0$ (preto) presente na imagem $I_{danos}$.
+Logo, a porcentagem de danos pode ser calculada como:
+
+\begin{equation}
+P = \frac{I_{danos}(0)}{I_{final}(0)}.
+\label{eq:pct}
+\end{equation}
+
+\noindent onde $I_{final}(0)$ é o número de \emph{pixels} pretos da imagem $I_{final}$: 

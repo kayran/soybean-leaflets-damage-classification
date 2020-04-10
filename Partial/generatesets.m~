@@ -1,0 +1,11 @@
+function [setc setl] = generatesets(qcol,qlag,ncol,nlag,niter,qtdset)
+    sets = zeros([niter qtdset uint32(qcol+qlag)]);
+    for i=1:niter
+        [lixo,xc] = sort(rand([1 ncol]));
+        [lixo,xl] = sort(rand([1 nlag]));
+        for j=1:qtdset
+            sets(i,j,1:qcol) = xc(1,((j-1)*qcol+1):((j-1)*qcol+qcol));
+            sets(i,j,(qcol+1):(qcol+qlag)) = xl(1,((j-1)*qlag+1):((j-1)*qlag+qlag));
+        end
+    end
+end

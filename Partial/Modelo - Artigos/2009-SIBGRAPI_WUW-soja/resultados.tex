@@ -1,0 +1,136 @@
+
+
+Na Tabela \ref{taberro} são apresentados os valores de erro absoluto médio (EAM) e erro relativo médio (ERM) dos métodos avaliados. 
+Os valores estão dispostos no seguinte formato: $\mu \pm \sigma$, onde $\mu$ representa a média e $\sigma$ o desvio padrão. 
+Os valores foram separados em grupos, divididos em faixas de porcentagem ideal de área danificada, para permitir uma análise mais minuciosa das avaliações
+
+\fnbelowfloat
+\begin{table*}[!htb]
+  \begin{center}
+  \caption{EAM e ERM dos métodos avaliados para cada intervalo de porcentagem de área foliar danificada.}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|}
+
+\hline
+ Grupo &   & \multicolumn{2}{|c|}{\emph{Humano}} &  \multicolumn{2}{|c|}{\emph{Mura-07}} &  \multicolumn{2}{|c|}{\emph{Proposto}}   \\
+\cline{3-8}
+ \% & F & EAM (\%) & ERM (\%) &  EAM (\%) & ERM (\%) &  EAM (\%) & ERM (\%) \\
+
+      \hline
+      0 |--- 5 & 54 & $2,90 \pm 2,48$ & $86,43 \pm 93,43$ & $0,53 \pm 0,50$ & $17,25 \pm 20,65$ &  $0,37 \pm 0,56$ & $12,26 \pm 25,19$ \\
+
+      5 |--- 10 & 40 & $5,54 \pm 3,73$ & $73,71 \pm 46,72$ & $1,13 \pm 0,75$ & $ 15,25 \pm 9,17 $ & $0,65 \pm 0,50$ & $8,86 \pm 6,39$ \\
+
+      10 |--- 15 & 31 & $6,35 \pm 4,34$ & $50,91 \pm 34,36$ & $1,93 \pm 1,88$ & $15,64 \pm 15,82$ & $1,08 \pm 1,20$ & $8,74 \pm 9,88$ \\
+
+      15 |--- 20 & 13 & $9,61 \pm 5,26$  & $59,64 \pm 33,46$ & $3,77 \pm 3,81$ & $23,28 \pm 23,87$ &  $2,05 \pm 2,13$ & $12,63 \pm 13,36$ \\
+
+      20|---99 & 10 & $14,93 \pm 10,42$ & $54,95 \pm 34,36$ & $6,32 \pm 3,76$ & $22,99 \pm 10,07$ &  $2,58 \pm 2,07$ & $9,18 \pm 4,86$ \\
+      \hline
+      \hline
+      \textbf{TOTAL} & \textbf{148} & $\mathbf{5,74 \pm 5,36}$ & $\mathbf{71,07 \pm 65,84}$ & $\mathbf{1,66 \pm 2,33}$ & $\mathbf{17,29 \pm 16,94}$ & $\mathbf{0,89 \pm 1,24}$ & $\mathbf{10,43 \pm 16,69}$ \\
+      \hline
+
+    \end{tabular}
+    \label{taberro}
+  \end{center}
+\end{table*}
+
+Quanto menor o valor de EAM, maior é a exatidão da estimativa da área foliar danificada. 
+Com relação a esse critério, observou-se que o método \emph{Proposto} apresentou o melhor resultado, pois o EAM gerado por ele foi um pouco mais da metade do EAM gerado pelo método \emph{Mura-07} e oito vezes menor que o EAM do método \emph{Humano}.
+
+
+\begin{figure}[!tb]
+  \centering
+  \subfigure[][]{\includegraphics[width=6.8 cm]{figures/alunos.jpg}\label{subfig:alunos}}
+  \subfigure[][]{\includegraphics[width=6.8 cm]{figures/mura.jpg}\label{subfig:mura}}
+  \subfigure[][]{\includegraphics[width=6.8 cm]{figures/proposto.jpg}\label{subfig:proposto}}
+  \caption{Relação entre a área foliar danificada real e a estimada pelos métodos: (a) \emph{Humano}, (b) \emph{Mura-07} e (c) \emph{Proposto}. \label{fig:graficos}}
+\end{figure}
+
+Os gráficos da Figura \ref{fig:graficos} estabelecem a relação entre a área foliar danificada real (referência) com os métodos avaliados.
+O método proposto apresentou boa estimativa de área foliar danificada, como pode ser observado pela proximidade dos pontos à reta 1:1, na Figura~\ref{subfig:proposto}.
+Já para o gráfico da Figura~\ref{subfig:mura} pode-se observar que existem mais pontos afastados da reta 1:1, principalmente quando a área foliar ideal ultrapassa $20\%$.
+Note ainda que como apresenta o gráfico da Figura~\ref{subfig:proposto} os valores estimados pelos seres humanos estão quase que em sua maioria absoluta bem acima da área foliar danificada ideal.
+Ou seja, o ser humano tende a super avaliar a área foliar danificada.
+
+A seguir, é apresentado um teste de significância estatística que tem como objetivo confirmar a superioridade do método \emph{Proposto} em relação aos métodos \emph{Mura-07} e \emph{Humano}. 
+Para tanto, foi aplicado o teste $t$ de \emph{Student} \cite{triola:99}, com o nível de significância de $0,0005$ tendo como hipótese alternativa, $H_1$, que o EAM do método \emph{Proposto} é menor que o EAM gerado pelos os outros dois métodos e como hipótese nula, $H_0$, o contrário; isto é, que o EAM do método \emph{Proposto} é maior ou igual ao EAM dos demais.
+
+Foram calculados os valores do teste $t$ de \emph{Student} entre o método \emph{Proposto} e os métodos \emph{Humano} ($t_1 = -11,987$) e \emph{Mura-07} ($t_2 = -6,799$).
+Para aceitar a hipótese nula, ao nível de significância de $0,0005$, $t_1$ e $t_2$ devem ser maiores que $-3,291$. 
+Como esta afirmação é negativa, a hipótese nula é rejeitada.
+Assim, podemos concluir que o método \emph{Proposto} gera estimativas de área foliar danificada estatisticamente melhores que as dos outros dois métodos.
+
+A Tabela~\ref{erromax} apresenta o erro máximo gerado por cada método, que foram observados na mesma amostra. 
+Os valores mostram que o erro máximo do método \emph{Proposto} é inferior ao gerado pelos dois outros métodos, o que significa um maior grau de confiabilidade.
+
+\begin{table}[!tbh]
+  \begin{center}
+  \caption{Erro máximo cometido por cada método.}
+  \begin{tabular}{r|c|c|c}
+      \hline
+      \hline
+      Método & Valor real & Valor estimado & Erro máximo\\
+      \hline
+      \hline
+      \emph{Humano} & $39,54 \%$ & $76,25 \%$ & $36,71 \%$\\
+
+      \emph{Mura-07} & $39,54 \%$ & $25,84 \%$ & $13,70 \%$\\
+
+      \emph{Proposto} & $39,54 \%$ & $31,64 \%$ & $7,90 \%$\\
+      \hline
+      \hline
+  \end{tabular}
+  \label{erromax}
+  \end{center}
+\end{table}
+
+
+
+Também foi verificada a capacidade de auxílio ao diagnóstico de cada método.
+A Tabela~\ref{tabindicacao} mostra o número de indicações de ação de controle corretas realizadas por cada método. 
+Os resultados mostram que o método \emph{Proposto} apresentou uma taxa de acerto total de $95,95 \%$ ($(17+125)/(23+125)$), valor superior ao método \emph{Mura-07} e \emph{Humano} que apresentaram uma taxa de $92,57 \%$ ($(12+125)/(23+125)$) e $75,78 \%$ ($(23+89)/(23+125)$), respectivamente.
+
+\begin{table}[!tbh]
+  \begin{center}
+  \caption{Indicações corretas de cada método em relação à necessidade de medidas de controle na lavoura.}
+  \begin{tabular}{r|c|c|c|c}
+      \hline
+      \hline
+      Indicação & \emph{Referência} & \emph{Humano}  & \emph{Mura-07} & \emph{Proposto}\\
+      \hline
+      \hline
+      Sim & $23$ & $23$ & $12$ & $17$ \\
+      Não & $125$ & $89$ & $125$ & $125$ \\
+      \hline
+      \hline
+    \end{tabular}
+    \label{tabindicacao}
+  \end{center}
+\end{table}
+
+A alta taxa de acerto do método \emph{Humano} para situações em que a indicação é positiva, se deve ao fato dos resultados serem superestimados como é ilustrado no gráfico da Figura \ref{subfig:alunos}.
+
+Na Tabela \ref{tabmatriz} é apresentada a matriz confusão para as imagens finais dos métodos \emph{Mura-07} e \emph{Proposto}. 
+Valores altos de $TP$ e $TN$ significam uma semelhança grande entre as imagens analisadas. 
+Com relação a esse critério é possível verificar que o método \emph{Proposto} obteve um maior sucesso na segmentação e reconstrução das imagens das amostras, do que o método \emph{Mura-07}.
+
+\begin{table}[!tbh]
+  \begin{center}
+  \caption{Matriz confusão das imagens finais dos métodos \emph{Mura-07} e \emph{Proposto} em relação as imagens de referência.}
+  \begin{tabular}{r|c|c|c|c}
+      \hline
+      \hline
+      Imagem(Método) & $TP$ & $FN$  & $FP$ & $TN$\\
+      \hline
+      \hline
+      Segmentada(\emph{Mura-07})    & $98,51\%$ & $1,49\%$ & $0,28\%$ & $99,72\%$ \\
+      Segmentada(\emph{Proposto})   & $99,08\%$ & $0,92\%$ & $0,34\%$ & $99,66\%$ \\
+      Reconstruída(\emph{Mura-07})  & $98,51\%$ & $1,49\%$ & $0,28\%$ & $99,21\%$ \\
+      Reconstruída(\emph{Proposto}) & $99,60\%$ & $0,40\%$ & $0,39\%$ & $99,61\%$ \\
+      \hline
+      \hline
+    \end{tabular}
+    \label{tabmatriz}
+  \end{center}
+\end{table}
